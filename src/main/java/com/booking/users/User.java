@@ -23,6 +23,7 @@ public class User {
     @NotBlank(message = "Password name must be provided")
     @Column(nullable = false)
     @ApiModelProperty(name = "password", value = "Password of the user", required = true, example = "password", position = 2)
+    @ValidPassword
     private String password;
 
     public User() {

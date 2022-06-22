@@ -3,3 +3,7 @@ fileignoreconfig:
   checksum: 718b33cc7f6135e70c95805b079f9122e04321f598ca576f20186a1bad274e36
 - filename: scripts/test_deployment.sh
   checksum: d27bec4ba2b457de4045a468a7594c9f8c209a799e684f9d2afb1072303666ee
+- filename: build.gradle
+  checksum: 57fe3ce6243ade32d2cfd3b6b4dc38b5c23a8fa1eaeb8a8bc8c78c0810ba7218
+- filename: src/main/java/com/booking/users/PasswordConstraintValidator.java
+  checksum: 1e031cd90e77b6230b89df1c235e0d0e0a752a94f87a277484b10a8c0f498ede
