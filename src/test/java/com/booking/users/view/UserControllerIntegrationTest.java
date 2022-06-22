@@ -14,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = App.class)
@@ -41,9 +43,9 @@ class UserControllerIntegrationTest {
 
     @Test
     public void shouldLoginSuccessfully() throws Exception {
-        userRepository.save(new User("test-user", "password"));
+        userRepository.save(new User("test-user", "P@rul1abc"));
         mockMvc.perform(get("/login")
-                .with(httpBasic("test-user", "password")))
+                .with(httpBasic("test-user", "P@rul1abc")))
                 .andExpect(status().isOk());
     }
 
@@ -51,6 +53,18 @@ class UserControllerIntegrationTest {
     public void shouldThrowErrorMessageForInvalidCredentials() throws Exception {
         mockMvc.perform(get("/login"))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void givenLoggedInUser_whenChangingPassword_thenCorrect() throws Exception {
+        userRepository.save(new User("test-user", "P@rul1abc"));
+        mockMvc.perform(get("/login")
+                .with(httpBasic("test-user", "P@rul1abc")));
+
+        mockMvc.perform(post("/changePassword").param("password", "P@rul1xyz")
+                .param("oldpassword", "P@rul1abc").with(user("test-user")))
+                .andExpect(status().isOk());
+
     }
 
 }
