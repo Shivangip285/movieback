@@ -5,15 +5,17 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
-
+@Validated
 @Api(tags = "Users")
 @RestController
 public class UserController {
@@ -35,7 +37,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('READ_PRIVILEGE')")
     @PostMapping("/changePassword")
-    String changePassword(Principal principal, @RequestParam("password") String password,
+    String changePassword(Principal principal, @RequestParam("password") @ValidPassword String password,
                           @RequestParam("oldpassword") String oldPassword) throws InvalidOldPasswordException {
 
         return userPrincipalService.changePassword(principal,oldPassword, password);

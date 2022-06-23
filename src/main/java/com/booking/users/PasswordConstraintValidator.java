@@ -3,6 +3,7 @@ package com.booking.users;
 import org.passay.*;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Service
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
     @Override
     public void initialize(ValidPassword arg0) {
