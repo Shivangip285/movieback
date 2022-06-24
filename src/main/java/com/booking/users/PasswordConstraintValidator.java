@@ -1,5 +1,6 @@
 package com.booking.users;
 
+import lombok.SneakyThrows;
 import org.passay.*;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
     public void initialize(ValidPassword arg0) {
     }
 
+    @SneakyThrows
     @Override
     public boolean isValid(String password, ConstraintValidatorContext context) {
         PasswordValidator validator = new PasswordValidator(Arrays.asList(

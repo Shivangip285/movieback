@@ -1,17 +1,18 @@
 package com.booking.users;
 
-import com.booking.exceptions.InvalidOldPasswordException;
+import com.booking.exceptions.InvalidCurrentPasswordException;
+import com.booking.exceptions.NewPasswordMatchedPreviousPasswordsException;
+import com.booking.handlers.models.ErrorResponse;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,17 @@ public class UserController {
 
     @PreAuthorize("hasRole('READ_PRIVILEGE')")
     @PostMapping("/changePassword")
+    @ApiOperation(value = "Change password")
+    @ResponseStatus(code = HttpStatus.OK)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Changed password successfully"),
+            @ApiResponse(code = 401, message = "Unauthorized user", response = ErrorResponse.class),
+            @ApiResponse(code = 403, message = "New password has incorrect format", response = ErrorResponse.class),
+            @ApiResponse(code = 406, message = "Duplicate new password", response = ErrorResponse.class),
+            @ApiResponse(code = 500, message = "Something failed in the server", response = ErrorResponse.class)
+    })
     String changePassword(Principal principal, @RequestParam("password") @ValidPassword String password,
-                          @RequestParam("oldpassword") String oldPassword) throws InvalidOldPasswordException {
+                          @RequestParam("oldpassword") String oldPassword) throws InvalidCurrentPasswordException, NewPasswordMatchedPreviousPasswordsException {
 
         return userPrincipalService.changePassword(principal,oldPassword, password);
     }

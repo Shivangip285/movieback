@@ -1,6 +1,8 @@
 package com.booking.handlers;
 
 import com.booking.exceptions.EnumValidationException;
+import com.booking.exceptions.InvalidCurrentPasswordException;
+import com.booking.exceptions.NewPasswordMatchedPreviousPasswordsException;
 import com.booking.handlers.models.ErrorResponse;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +61,34 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         }});
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+
+
+    @ExceptionHandler(InvalidCurrentPasswordException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidOldPasswordException(InvalidCurrentPasswordException e) {
+        ErrorResponse error = new ErrorResponse("Invalid password", new ArrayList<>() {{
+            add(e.getMessage());
+        }});
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
+        ErrorResponse error = new ErrorResponse("Incorrect format", new ArrayList<>() {{
+            add(e.getMessage());
+        }});
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(NewPasswordMatchedPreviousPasswordsException.class)
+    public ResponseEntity<ErrorResponse> handleNewPasswordMatchedPreviousPasswordsException(NewPasswordMatchedPreviousPasswordsException e) {
+        ErrorResponse error = new ErrorResponse("Duplicate new password", new ArrayList<>() {{
+            add(e.getMessage());
+        }});
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAnyException() {

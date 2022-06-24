@@ -25,6 +25,7 @@ public class User {
     @ApiModelProperty(name = "password", value = "Password of the user", required = true, example = "password", position = 2)
     private String password;
 
+
     public User() {
     }
 
@@ -52,4 +53,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
