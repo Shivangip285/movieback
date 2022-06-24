@@ -26,7 +26,8 @@ class DefaultMovieGatewayTest {
     public static final String MOCK_SERVER_RESPONSE = "{\"imdbID\":\"id\"," +
             "\"Title\":\"title\"," +
             "\"Runtime\":\"120 min\"," +
-            "\"Plot\":\"plot\"}";
+            "\"Plot\":\"plot\"," +
+            "\"Poster\":\"poster\"}";
     private MockWebServer mockWebServer;
 
     @BeforeEach
@@ -46,7 +47,7 @@ class DefaultMovieGatewayTest {
 
         final var actualMovie = defaultMovieGateway.getMovieFromId("id");
 
-        final var expectedMovie = new Movie("id", "title", Duration.ofMinutes(120), "plot");
+        final var expectedMovie = new Movie("id", "title", Duration.ofMinutes(120), "plot", "poster");
         assertThat(actualMovie, is(equalTo(expectedMovie)));
     }
 
