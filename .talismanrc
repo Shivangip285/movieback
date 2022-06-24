@@ -7,3 +7,19 @@ fileignoreconfig:
   checksum: 57fe3ce6243ade32d2cfd3b6b4dc38b5c23a8fa1eaeb8a8bc8c78c0810ba7218
 - filename: src/main/java/com/booking/users/PasswordConstraintValidator.java
   checksum: 1e031cd90e77b6230b89df1c235e0d0e0a752a94f87a277484b10a8c0f498ede
+- filename: src/main/resources/db/migration/V1.10__AddColumnsOldPasswordsToUserTable.sql
+  checksum: 95efc7d9d732b6efe7bc08419974dc16de11097923e1757c21b8a94337c32156
+- filename: src/main/resources/db/migration/V1.11__CreatePasswordLoggerTable.sql
+  checksum: 0e8872afb13aa213373ba7f3e870ba0ff35cf90b37769b62a2451ec85269a817
+- filename: src/main/resources/db/migration/V1.12__DeleteColumnUsernameFromPasswordLogger.sql
+  checksum: 8b1a3c12d3739eb72b0e465ac81d7a6b894708e75bb6a82971589c30c9e20a6a
+- filename: src/main/resources/db/migration/V1.13__AlterUserTable.sql
+  checksum: f8b284f015b5a3e2ae3911ee45043adcf288bf997d5e449cd1e22315118044ed
+- filename: src/main/java/com/booking/users/UserController.java
+  checksum: f3db0780a9d8bb57869aafa743c39d8fc95d7d1c555b16cd7fc9a8c3959e090e
+- filename: src/main/java/com/booking/users/UserPrincipalService.java
+  checksum: d18c944dbcf668d992396c99d60e1ccd599450d0a7c894e0924cec6a8c438d36
+- filename: src/main/java/com/booking/users/PasswordLoggerRepository.java
+  checksum: 3d47c3e9ad25b6e4ce0517555b41e2916889603a84f9955220660851d45b7d29
+- filename: src/main/java/com/booking/users/PasswordLogger.java
+  checksum: aa9af3c242903d6542ed246662eda77986b16323259a1a2ea7769e5f4afe4b38
