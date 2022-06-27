@@ -37,7 +37,7 @@ public class BookingTest {
         slot = new Slot("Slot name", Time.valueOf("13:00:00"), Time.valueOf("15:00:00"));
         date = Date.valueOf("2020-06-01");
         show = new Show(date, slot, BigDecimal.valueOf(245.99), "movie-1");
-        customer = new Customer("customer", "9081238761");
+        customer = new Customer(1L,"customer name", "992212399","skyfox123","skyfox@gmail.com","password","city",new Date(12-20-2022));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class BookingTest {
     }
 
     @Test
-    public void should_return_only_fields_reqiured_for_booking_confirmation() {
+    public void should_return_only_fields_required_for_booking_confirmation() {
         BigDecimal amountPaid = BigDecimal.valueOf(244.99);
         final Booking booking = new Booking(date, show, customer, 2, amountPaid);
 

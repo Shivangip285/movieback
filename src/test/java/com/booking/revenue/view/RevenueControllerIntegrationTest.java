@@ -78,7 +78,7 @@ public class RevenueControllerIntegrationTest {
                 showRepository.save(new Show(Date.valueOf("2020-01-01"), slotTwo, BigDecimal.valueOf(150), "movie_1"));
         final Show showThree =
                 showRepository.save(new Show(Date.valueOf("2020-01-02"), slotTwo, BigDecimal.valueOf(250), "movie_1"));
-        final var customer = customerRepository.save(new Customer("Name", "9999999999"));
+        final var customer = customerRepository.save(new Customer(1L,"customer name", "992212399","skyfox123","skyfox@gmail.com","password","city",new Date(12-20-2022)));
 
         bookingRepository.save(
                 new Booking(Date.valueOf("2019-12-31"), showOne, customer, 2, BigDecimal.valueOf(400))
@@ -106,7 +106,7 @@ public class RevenueControllerIntegrationTest {
         showRepository.save(new Show(Date.valueOf("2020-01-01"), slotTwo, BigDecimal.valueOf(150), "movie_1"));
         final Show showThree =
                 showRepository.save(new Show(Date.valueOf("2020-01-02"), slotTwo, BigDecimal.valueOf(250), "movie_1"));
-        final var customer = customerRepository.save(new Customer("Name", "9999999999"));
+        final var customer = customerRepository.save(new Customer(1L,"customer name", "992212399","skyfox123","skyfox@gmail.com","password","city",new Date(12-20-2022)));
 
         bookingRepository.save(
                 new Booking(Date.valueOf("2019-12-31"), showThree, customer, 1, BigDecimal.valueOf(250))

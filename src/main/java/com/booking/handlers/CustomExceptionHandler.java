@@ -1,8 +1,6 @@
 package com.booking.handlers;
 
-import com.booking.exceptions.EnumValidationException;
-import com.booking.exceptions.InvalidCurrentPasswordException;
-import com.booking.exceptions.NewPasswordMatchedPreviousPasswordsException;
+import com.booking.exceptions.*;
 import com.booking.handlers.models.ErrorResponse;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +61,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-
     @ExceptionHandler(InvalidCurrentPasswordException.class)
     public ResponseEntity<ErrorResponse> handleInvalidOldPasswordException(InvalidCurrentPasswordException e) {
         ErrorResponse error = new ErrorResponse("Invalid password", new ArrayList<>() {{
@@ -94,5 +91,21 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAnyException() {
         ErrorResponse error = new ErrorResponse("Something went wrong", emptyDetails);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleUsernameAlreadyExistsException(UsernameAlreadyExistException e) {
+        ErrorResponse error = new ErrorResponse("Username Already Exists", new ArrayList<>() {{
+            add(e.getMessage());
+        }});
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(PhoneNumberAlreadyExists.class)
+    public ResponseEntity<ErrorResponse> handlePhoneNumberAlreadyExistsException(PhoneNumberAlreadyExists e) {
+        ErrorResponse error = new ErrorResponse("Phone Number Already Exists", new ArrayList<>() {{
+            add(e.getMessage());
+        }});
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

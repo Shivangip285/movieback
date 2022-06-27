@@ -42,7 +42,7 @@ public class BookingServiceTest {
         bookingDate = Date.valueOf("2020-06-01");
         Slot slot = new Slot("13:00-16:00", Time.valueOf("13:00:00"), Time.valueOf("16:00:00"));
         show = new Show(bookingDate, slot, BigDecimal.valueOf(250), "1");
-        customer = new Customer("Customer name", "9090909090");
+        customer = new Customer(1L,"customer name", "992212399","skyfox123","skyfox@gmail.com","password","city",new Date(12-20-2022));
         bookingService = new BookingService(bookingRepository, customerRepository, showRepository);
     }
 

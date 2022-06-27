@@ -1,3 +1,4 @@
+
 # Setup service
 
 ## Install java
@@ -33,7 +34,7 @@ javac -version
     - starting date
     - number of weeks to seed data from given starting date
 
-`sh seedShowData.sh 12-12-2021 3`
+`sh seedShowData.sh 2022-06-23 3`
 
 ## Run the application
 - Build the application and run the test along with coverage

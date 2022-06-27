@@ -54,27 +54,4 @@ class UserControllerIntegrationTest {
         mockMvc.perform(get("/login"))
                 .andExpect(status().isUnauthorized());
     }
-
-    @Test
-    public void givenLoggedInUser_whenChangingPassword_thenCorrect() throws Exception {
-        userRepository.save(new User("test-user", "P@rul1abc"));
-        mockMvc.perform(get("/login")
-                .with(httpBasic("test-user", "P@rul1abc")));
-
-        mockMvc.perform(post("/changePassword").param("password", "P@rul1xyz")
-                .param("oldpassword", "P@rul1abc").with(user("test-user")))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void shouldThrowErrorMessageWhenInvalidPasswordIsGivenForChangePassword() throws Exception {
-        userRepository.save(new User("test-user", "P@rul1abc"));
-        mockMvc.perform(get("/login")
-                .with(httpBasic("test-user", "P@rul1abc")));
-
-        mockMvc.perform(post("/changePassword").param("password", "foobar")
-                        .param("oldpassword", "P@rul1abc").with(user("test-user")))
-                .andExpect(status().is5xxServerError());
-    }
-
 }
