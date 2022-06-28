@@ -56,4 +56,9 @@ public class Slot {
     public Time getStartTime() {
         return startTime;
     }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
 }

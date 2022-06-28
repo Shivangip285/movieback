@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Repository
 public interface ShowRepository extends JpaRepository<Show, Long> {

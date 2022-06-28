@@ -5,11 +5,13 @@ import com.booking.movieGateway.exceptions.FormatException;
 import com.booking.movieGateway.models.Movie;
 import com.booking.shows.ShowService;
 import com.booking.shows.respository.Show;
+import com.booking.shows.respository.ShowRepository;
 import com.booking.shows.view.models.ShowResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -45,9 +47,15 @@ public class ShowController {
         }
         return showResponse;
     }
+    @GetMapping("/allshow")
+    public List<String> fetchAll1() throws IOException, FormatException {
+        List<String> showResponse = new ArrayList<>();
+        return showService.getAllMoviesList();
+    }
 
     private ShowResponse constructShowResponse(Show show) throws IOException, FormatException {
         Movie movie = showService.getMovieById(show.getMovieId());
         return new ShowResponse(movie, show.getSlot(), show);
     }
+
 }
