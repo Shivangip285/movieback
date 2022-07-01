@@ -1,6 +1,7 @@
 package com.booking.shows.respository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -11,4 +12,5 @@ import java.util.function.Predicate;
 public interface ShowRepository extends JpaRepository<Show, Long> {
 
     List<Show> findByDate(Date date);
+
 }

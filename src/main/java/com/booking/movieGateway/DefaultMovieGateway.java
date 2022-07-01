@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -43,16 +42,28 @@ public class DefaultMovieGateway implements MovieGateway {
         final var jsonResponse = requireNonNull(response.body()).string();
         return objectMapper.readValue(jsonResponse, MovieServiceResponse.class).toMovie();
     }
-    @Override
-    public List<String> getAllMovie() throws IOException, FormatException {
-        final var request = requestBuilder.url(appConfig.getMovieServiceHost() + "movies").build();
-        final var response = httpClient.newCall(request).execute();
-        final var jsonResponse = requireNonNull(response.body()).string();
-        List<MovieServiceResponse> listMovie = objectMapper.readValue(jsonResponse, new TypeReference<List<MovieServiceResponse>>(){});
-        List<String> movieTitles = new ArrayList<String>();
-        for (MovieServiceResponse movie: listMovie ) {
-            movieTitles.add(movie.toMovie().getName());
-        }
-        return movieTitles;
+//    @Override
+//    public List<String> getAllMovie() throws IOException, FormatException {
+//        final var request = requestBuilder.url(appConfig.getMovieServiceHost() + "movies").build();
+//        final var response = httpClient.newCall(request).execute();
+//        final var jsonResponse = requireNonNull(response.body()).string();
+//        List<MovieServiceResponse> listMovie = objectMapper.readValue(jsonResponse, new TypeReference<List<MovieServiceResponse>>(){});
+//        List<String> movieTitles = new ArrayList<String>();
+//        for (MovieServiceResponse movie: listMovie ) {
+//            movieTitles.add(movie.toMovie().getName());
+//        }
+//        return movieTitles;
+//    }
+@Override
+public List<Movie> getAllMovie() throws IOException, FormatException {
+    final var request = requestBuilder.url(appConfig.getMovieServiceHost() + "movies").build();
+    final var response = httpClient.newCall(request).execute();
+    final var jsonResponse = requireNonNull(response.body()).string();
+    List<MovieServiceResponse> listMovie = objectMapper.readValue(jsonResponse, new TypeReference<List<MovieServiceResponse>>(){});
+    List<Movie> movieTitles = new ArrayList<Movie>();
+    for (MovieServiceResponse movie: listMovie ) {
+        movieTitles.add(movie.toMovie());
     }
+    return movieTitles;
+}
 }

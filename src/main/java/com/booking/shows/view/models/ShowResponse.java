@@ -31,6 +31,26 @@ public class ShowResponse {
     @ApiModelProperty(required = true, position = 5)
     private final Slot slot;
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public Object getSlot() {
+        return slot;
+    }
+
     public ShowResponse(Movie movie, Slot slot, Show show) {
         this.movie = movie;
         this.slot = slot;

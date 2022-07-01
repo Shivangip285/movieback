@@ -2,13 +2,13 @@ package com.booking.slots.view;
 
 import com.booking.movieGateway.exceptions.FormatException;
 import com.booking.slots.repository.Slot;
+import com.booking.shows.respository.Show;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //@Api(tags = "Slots")
 @RestController
@@ -40,13 +40,22 @@ public class SlotController {
 //    slotResponse.put("slotEndTime",slotService.fetchAllSlot());
 //    return slotResponse;
 //}
-@GetMapping
-public Map<String, List<String>> fetchTime1() throws IOException, FormatException {
-    //List<Slot> slotResponse = new ArrayList<>();
-    Map<String, List<String>> slotResponse = new HashMap<>();
-    //Slot slot=new Slot();
-    slotResponse.put("slotStartTime",slotService.fetchAllStartTimes());
-    slotResponse.put("slotEndTime",slotService.fetchAllEndTimes());
+//@GetMapping("/startTime")
+//public List<String> fetchAllStartTimes() throws IOException, FormatException {
+//    List<String> slotResponse = new ArrayList<>();
+//    slotResponse.addAll(slotService.fetchAllStartTimes());
+//    return slotResponse;
+//}
+@GetMapping("/endTime")
+public List<Slot> fetchAllSlots() throws IOException, FormatException {
+    List<Slot> slotResponse = new ArrayList<>();
+    slotResponse.addAll(slotService.fetchAllEndTimes());
     return slotResponse;
 }
+    @GetMapping("/occupied")
+    public List<Object> fetchAllOccupiedSlots(@Valid @RequestParam(name = "date") java.sql.Date date) throws IOException, FormatException {
+        List<Object> slotOccupied=new ArrayList<>();
+        slotOccupied.addAll(slotService.fetchAllOccupiedSlots(date));
+        return slotOccupied;
+    }
 }

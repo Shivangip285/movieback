@@ -42,17 +42,22 @@ public class ShowController {
     })
     public List<ShowResponse> fetchAll(@Valid @RequestParam(name = "date") Date date) throws IOException, FormatException {
         List<ShowResponse> showResponse = new ArrayList<>();
+        List<Object> showDetails= new ArrayList<>();
         for (Show show : showService.fetchAll(date)) {
             showResponse.add(constructShowResponse(show));
+            showDetails.add(constructShowResponse(show).getSlot());
+            showDetails.add(constructShowResponse(show).getDate());
+            showDetails.add(constructShowResponse(show).getMovie());
         }
+
         return showResponse;
     }
+
     @GetMapping("/allshow")
-    public List<String> fetchAll1() throws IOException, FormatException {
-        List<String> showResponse = new ArrayList<>();
+    public List<Movie> fetchAllMovies() throws IOException, FormatException {
+        List<ShowResponse> showResponse = new ArrayList<>();
         return showService.getAllMoviesList();
     }
-
     private ShowResponse constructShowResponse(Show show) throws IOException, FormatException {
         Movie movie = showService.getMovieById(show.getMovieId());
         return new ShowResponse(movie, show.getSlot(), show);

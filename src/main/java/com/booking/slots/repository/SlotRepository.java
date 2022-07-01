@@ -12,11 +12,11 @@ public interface SlotRepository extends JpaRepository<Slot, Integer> {
     List<Slot> findAll();
     List<Slot> findByEndTimeIsNotNull();
 
-    @Query("SELECT endTime FROM Slot slot")
-    List<String> findEndTimes();
+//    @Query("SELECT startTime,endTime FROM Slot slot")
+//    List<Object> findStartTimesAndEndTimes();
 
-    @Query("SELECT startTime FROM Slot slot")
-    List<String> findStartTimes();
+//    @Query("SELECT startTime FROM Slot slot")
+//    List<String> findStartTimes();
 
 //    @Query("SELECT startTime FROM Show show")
 //    List<Slot> findSlot();
